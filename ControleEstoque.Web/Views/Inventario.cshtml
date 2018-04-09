@@ -1,0 +1,52 @@
+﻿@model List<ControleEstoque.Web.Models.InventarioEstoqueModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Inventario do Estoque";
+}
+
+<link href="~/Content/bootstrap-select.css" rel="stylesheet" />
+<link href="~/Content/Cadastro/GrupoProduto.css" rel="stylesheet" />
+
+<div id="Inventario">
+    <section id="inventario_cabecalho">
+        <h1>@ViewBag.Title</h1>
+    </section>
+
+    <section id="Inventario-Conteudo">
+        <div id="cabecalho_grid" class="row">
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table id="grid_inventario" class="table table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Id Prod</th>
+                            <th>Id Lote</th>
+                            <th>Nome</th>
+                            <th>Entrada</th>
+                            <th>Vencimento</th>
+                            <th>Quantidade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            if (Model != null)
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <tr data-id="@item.Id">
+                                        <td>@item.Id</td>
+                                        <td>@item.idLote</td>
+                                        <td>@item.nome</td>
+                                        <td>@item.dataEntrada.ToString("dd/MM/yyyy")</td>
+                                        <td>@item.dataVencimento.ToString("dd/MM/yyyy")</td>
+                                        <td>@item.qtdProduto</td>
+                                    </tr>
+                                }
+                            } }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>

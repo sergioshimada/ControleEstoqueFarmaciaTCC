@@ -1,0 +1,66 @@
+﻿@model List<ControleEstoque.Web.Models.SaidaEstoqueModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Saida do Estoque";
+}
+
+<link href="~/Content/bootstrap-select.css" rel="stylesheet" />
+<link href="~/Content/Cadastro/GrupoProduto.css" rel="stylesheet" />
+<div id="saida_estoque">
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <section id="saida_cabecalho">
+        <h1>@ViewBag.Title</h1>
+    </section>
+
+    <section id="Saida-Conteudo">
+        <div id="cabecalho_grid" class="row">
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table id="grid_inventario" class="table table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Id Prod</th>
+                            <th>Id Lote</th>
+                            <th>Nome</th>
+                            <th>Entrada</th>
+                            <th>Vencimento</th>
+                            <th>Quantidade</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            if (Model != null)
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <tr data-id="@item.idLote">
+                                        <td>@item.Id</td>
+                                        <td>@item.idLote</td>
+                                        <td>@item.nome</td>
+                                        <td>@item.dataEntrada.ToString("dd/MM/yyyy")</td>
+                                        <td>@item.dataVencimento.ToString("dd/MM/yyyy")</td>
+                                        <td>@item.qtdProduto</td>
+                                        <td>
+                                            @Html.TextBox("txt_qtdsaida", null, new { @class = "form-contorl" })
+                                            <a data-id="@item.idLote" class="btn btn-success btn-saida" role="button"> Remover do estoque</a>
+                                        </td>
+                                    </tr>
+                                }
+                            } }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>
+@section Scripts{
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap-select.js"></script>
+    <script>
+        var tituloPagina = '@ViewBag.Title';
+        var url_saida = '@Url.Action("SaidaProdutoEstoque", "SaidaEstoque")';
+    </script>
+    <script src="~/Scripts/Operacoes/SaidaEstoque.js"></script>
+}
